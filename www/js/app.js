@@ -38,7 +38,11 @@ angular.module('starter',
     });
 })
 .config(function($stateProvider, $urlRouterProvider, $facebookProvider) {
-    $facebookProvider.setAppId('1784650308456321').setPermissions(['email', 'user_friends']);
+            console.log($facebookProvider);
+    $facebookProvider.setCustomInit({
+        appId: 1784650308456321,
+        cookie: true
+    }).setPermissions(['email', 'user_friends']);
 
 // Ionic uses AngularUI Router which uses the concept of states
 // Learn more here: https://github.com/angular-ui/ui-router

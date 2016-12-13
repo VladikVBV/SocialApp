@@ -4,7 +4,17 @@ angular
         function ($scope, $state, $ionicPopup, User) {
 
         $scope.user = User.update();
-
+        $scope.$watch('user.isLogged', function(newValue, oldValue){
+            if($scope.user.isLogged === null) {
+                return true;
+            }
+            if($scope.user.isLogged === true) {
+                return true;
+            }
+            if($scope.user.isLogged === false) {
+                $state.go('welcome');
+            }
+        });
         $scope.doLogout = function () {
             return $ionicPopup.confirm({
                 title: '<h2>Log Out</h2>',

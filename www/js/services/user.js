@@ -10,12 +10,10 @@ angular.module('starter.services')
                     $facebook.api('/me/picture', {
                         height: '400'
                     }).then(function (photo) {
-                        console.log(photo);
                         self.exports.photo = photo.data;
                     });
 
                     $facebook.api('/me', {fields: 'name,first_name,last_name,birthday,email,gender'}).then(function (user) {
-                        console.log(user);
                         self.exports.data = user;
                     });
                 } else {
@@ -31,7 +29,6 @@ angular.module('starter.services')
             };
 
             this.update = function() {
-                console.log(this.exports);
                 return this.exports;
             }
 
@@ -39,6 +36,11 @@ angular.module('starter.services')
                 return $facebook.login(['user_birthday','user_friends','email']);
             };
             this.logout = function() {
-                return $facebook.logout();
+                return $facebook.logout()
+                        .then(function(){
+                            self.exports.isLogged = false;
+                            self.exports.photo = {};
+                            self.exports.data = {};
+                        });
             }
     });

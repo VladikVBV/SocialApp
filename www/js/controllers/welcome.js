@@ -2,13 +2,19 @@ angular.module('starter.controllers')
     .controller('WelcomeCtrl', function ($scope, $state, $ionicLoading, $ionicHistory, $ionicPopup, User) {
         $ionicLoading.show();
         $scope.user = User.update();
-        $scope.$on('fb.auth.authResponseChange', function () {
+
+        $scope.$watch('user.isLogged', function(newValue, oldValue){
+            if($scope.user.isLogged === null) {
+                return true;
+            }
             $ionicLoading.hide();
             if($scope.user.isLogged === true) {
                 $ionicHistory.clearHistory();
                 $state.go('app.home');
+                return true;
             }
         });
+
         $scope.login = function() {
             $ionicLoading.show();
             User.login()
