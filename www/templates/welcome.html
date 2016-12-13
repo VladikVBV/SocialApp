@@ -1,0 +1,14 @@
+<ion-view view-title="SocialsConnect">
+    <ion-content scroll="false">
+        <div class="card">
+            <div class="item item-text-wrap">
+                <h2 class=" text-center padding-bottom">Welcome to Socials Connect Application!</h2>
+                <h1 class=" text-center positive" ng-if="user.isLogged === null">Loading..</h1>
+                <div class="item item-button-right" ng-if="user.isLogged === false">
+                    Sign in
+                    <button class="button icon button-positive ion-social-facebook" ng-click="login()"></button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
